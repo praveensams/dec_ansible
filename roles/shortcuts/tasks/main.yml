@@ -17,3 +17,13 @@
   with_items:
     - { src: 'fun.sh' , dest: "/etc/profile.d/fun.sh" }
 
+- name: Enabling ssh 
+  lineinfile:
+    path: '/etc/ssh/sshd_config'
+    regexp: '^PasswordAuthentication'
+    line: 'PasswordAuthentication yes'
+
+- name: Restarting the service
+  service:
+    name: "sshd"
+    state: "restarted"
