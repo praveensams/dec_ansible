@@ -1,0 +1,47 @@
+---
+# tasks file for shortcuts
+#
+
+- name: copying the function ==> "{{ inventory_hostname }}"
+  yum:
+    name: "{{ item }}"
+    state: "installed"
+  with_items:
+    - ['net-tools','vim','bind-utils','git','wget','unzip','zip']
+
+
+- name: copying the function ==> "{{ inventory_hostname }}"
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: 'fun.sh' , dest: "/etc/profile.d/fun.sh" }
+    - { src: 'maven.sh' , dest: '/etc/profile.d/maven.sh' }
+  delegate_to: "node03" 
+
+
+- name: copying the function ==> "{{ inventory_hostname }}"
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: 'fun.sh' , dest: "/etc/profile.d/fun.sh" }
+  when: "'node03' not in inventory_hostname"
+
+
+- name: Running the blocks ==> "{{ inventory_hostname }}"
+  block:
+
+    - name: copying the function ==> "{{ inventory_hostname }}"
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+      with_items:
+        - { src: 'fun.sh' , dest: "/etc/profile.d/fun.sh" }
+
+    - name: installing groovy ==> "{{ inventory_hostname }}"
+      yum:
+        name: "groovy"
+        state: "installed"
+
+  delegate_to: "jenkins"

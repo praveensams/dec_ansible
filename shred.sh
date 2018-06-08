@@ -1,0 +1,3 @@
+cd /var/log
+> messages
+

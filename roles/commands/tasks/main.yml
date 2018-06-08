@@ -1,0 +1,13 @@
+---
+# tasks file for commands
+#
+
+- name: checking the files
+  shell: |
+          ls /et
+  register: results
+  ignore_errors: True
+
+- name: checking the results
+  debug:
+    msg: "{{ results.rc}}"
