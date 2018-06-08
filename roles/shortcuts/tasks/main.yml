@@ -30,5 +30,5 @@
 
 - name: Setting up hostname
   shell: |
-        hostnamectl set-hostname "{{ server_name }}"
+        hostnamectl set-hostname "{{ server }}"
   
