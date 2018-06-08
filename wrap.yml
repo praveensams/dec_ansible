@@ -2,23 +2,6 @@
   become: true
   remote_user: vagrant
 
-  pre_tasks:
-    
-    - name: debug the names "{{ inventory_hostname}}"
-      shell: |
-             echo " `date`  {{ playbook }} " >> /tmp/logs
-      delegate_to: "localhost"
-
   roles:
     - "{{ playbook }}"
 
-  post_tasks:
-
-    - name: done with the changes
-      blockinfile:
-        path: "/tmp/sam"
-        marker: "--> --<" 
-        content: |
-               dates in one
-                results.stdout
-      delegate_to: localhost
