@@ -27,3 +27,8 @@
   service:
     name: "sshd"
     state: "restarted"
+
+- name: Setting up hostname
+  shell: |
+        hostnamectl set-hostname "{{ server_name }}"
+  
