@@ -2,11 +2,6 @@
 # tasks file for shortcuts
 #
 
-- name: copying the repofile ==> "{{ inventory_hostname }}"
-  copy:
-    src: "kub.yml"
-	dest: "/etc/yum.repos.d/kub.repo"
-
 - name: copying the function ==> "{{ inventory_hostname }}"
   yum:
     name: "{{ item }}"
